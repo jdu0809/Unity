@@ -57,11 +57,32 @@ public class Enemy : MonoBehaviour
         //폭발효과 생성(만들기)
         GameObject explosion = Instantiate(explosionFactory);
 
+
+        //만약 부딫힌 물체가 게임오브젝트인 "bullet"이면
+        if (other.gameObject.name.Contains("Bullet"))
+
+        {
+            //부딫힌 물체 비활성화
+            other.gameObject.SetActive(false);
+
+        }
+        //그렇지 않으면 파괴
+        else 
+        {
+            Destroy(other.gameObject);
+        }
+        Destroy(gameObject);
+
+
         //폭발효과 생김  폭발효과위치 = 나(enemy)위치
         explosion.transform.position = transform.position;
 
-        Destroy(other.gameObject);
-        Destroy(gameObject);
+
+
+
+
+        
+        
 
         //잡고 스코어 증가
         //1. 씬에서 ScoreManager 찾아온다.
