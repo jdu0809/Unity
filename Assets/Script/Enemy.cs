@@ -12,9 +12,14 @@ public class Enemy : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        
+    }
+    void OnEnable()
+    {
+
         //방향을 담을 변수 dir 선언
         //Vector3 dir;
-       
+
         //유니티에서 랜덤하게 0부턱 9까지 가져옴
         int rnadValue = UnityEngine.Random.Range(0, 9);
 
@@ -32,10 +37,11 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-             dir = Vector3.down;
+            dir = Vector3.down;
         }
-    }
 
+
+    }
     // Update is called once per frame
     void Update()
     {
@@ -64,6 +70,10 @@ public class Enemy : MonoBehaviour
         {
             //부딫힌 물체 비활성화
             other.gameObject.SetActive(false);
+            //탄알집 클래스 불러와서
+            Playershoot player = GameObject.Find("Player").GetComponent<Playershoot>();
+            //리스트에 총알 삽입
+            player.bulletObjectPool.Add(other.gameObject);
 
         }
         //그렇지 않으면 파괴
@@ -71,7 +81,17 @@ public class Enemy : MonoBehaviour
         {
             Destroy(other.gameObject);
         }
-        Destroy(gameObject);
+
+
+        //Destroy(gameObject); 파괴 대신에 비활성화로 자원 반환
+        gameObject.SetActive(false);
+
+        //Enemy  클래스 얻어오기
+        GameObject emObject = GameObject.Find("EnemyManager");
+        EnemyManager manager = emObject.GetComponent<EnemyManager>();
+
+        //리스트 삽입
+        manager.enemyObjectPool.Add(gameObject);
 
 
         //폭발효과 생김  폭발효과위치 = 나(enemy)위치
