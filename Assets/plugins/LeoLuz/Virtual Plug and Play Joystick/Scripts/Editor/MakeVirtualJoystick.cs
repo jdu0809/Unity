@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.SceneManagement;
-
+#endif
 public class MakeVirtualJoystick : MonoBehaviour
 {
     [MenuItem("GameObject/UI/Virtual Joystick")]

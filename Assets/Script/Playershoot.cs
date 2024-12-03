@@ -61,9 +61,10 @@ public class Playershoot : MonoBehaviour
 
 
         }
-    }
 #endif
-        public void Fire() 
+    }
+
+    public void Fire() 
         {
 
         ////////리스트로 바꾼 것////////////////
